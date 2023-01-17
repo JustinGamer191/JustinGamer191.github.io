@@ -1,20 +1,62 @@
 <!DOCTYPE html>
-<html>
+<style>
+    .parent {
+        margin: 1rem;
+        padding: 2rem 2rem;
+        text-align: center;
+    }
+
+    .child {
+        display: inline-block;
+        padding: 1rem 1rem;
+        vertical-align: middle;
+        margin-top: 0px;
+        margin-left: 10px;
+    }
+    .selected {
+        border-radius: 1px !important;
+        border-color:red !important;
+    }
+    .btn{
+        outline: 10px !important;
+    }
+</style>
+
 <head>
-<title>Vaibhav Hariramani, A tech Blogger</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
-<body>
-<nav>
-   
-<div >
-    <h1>Hi there, I'm Vaibhav Hariramani!</h1>
-    <p> <a href="/about">Read more about my life...</a></p>
-</div>
-<footer>
-<ul>
- <li><a href="mailto:vaibhav.hariramani01@gmail.com">email</a></li>
- <li><a href="https://github.com/vaibhavhariaramani">Github</a></li>
-</ul>
-</footer>
+
+<body style="margin:10px">
+    <div class="" role="group" aria-label="">
+        <button type="button" class="btn btn-primary" onclick="mAdd()" id="addB">Addition</button>
+        <button type="button" class="btn btn-primary" onclick="mSub()" id="subB">Subtraction</button>
+        <button type="button" class="btn btn-primary" onclick="mMul()" id="mulB">Multiply</button>
+        <button type="button" class="btn btn-primary" onclick="mDiv()" id="divB">Division</button>
+        <button type="button" class="btn btn-primary" onclick="mSupriseMe()" id="ranB">Suprise me</button>
+        <button type="button" class="btn btn-primary" onclick="refreshPage()">Reset</button>
+    </div>    
+    <div class="" role="group" aria-label="" style="margin-top:10px">
+        <button type="button" class="btn btn-primary" onclick="easy()" class="" id="easyMode" >Easy Mode</button>
+        <button type="button" class="btn btn-primary" onclick="hard()" class="" id="hardMode" style="margin-left:10px">Hard Mode</button>
+    </div>
+    <div class="parent">
+        <div class="child">Questions Answered:</div>
+        <div class="child" id="total">0</div>
+        <div class="child">Correct:</div>
+        <div class="child" id="score">0</div>
+    </div>
+    <div class='parent'>
+        <div class='child' id="num1" style="margin-top:-150px; font-size:30px" >Choose a Mode</div>
+        <div class='child' id="sign1" style="margin-top:-150px; font-size:30px"></div>
+        <div class='child' id="num2" style="margin-top:-150px; font-size:30px"></div>
+        <div class='child' style="margin-top:-150px">=</div>
+        <input class='child' id="ans1" placeholder="Answer" style="margin-top:-150px" ></input>
+        <input type="submit" onclick="checkAnswer()" class="child" value="Submit" style="margin-top:-150px"></button>
+    </div>
 </body>
+<script src="./MelodyMathGame.js"></script>
+
 </html>
