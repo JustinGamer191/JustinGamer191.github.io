@@ -148,6 +148,8 @@ function mDiv() {
     }
 }
 function mSupriseMe() {
+    if(!started){document.getElementById("divB").classList.add("selected")}
+    started = true;
     if (notdone) { return; }
     document.getElementById("ranB").classList.add("selected")
     started = true;
