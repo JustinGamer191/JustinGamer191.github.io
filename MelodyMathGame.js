@@ -1,227 +1,152 @@
-var score = 0;
+var mode = "none";
+var dif = "none";
 var num1;
 var num2;
+var sign = "";
 var answer;
-var sign = "0";
 var answered = 0;
-var notdone = false;
-var started = false;
-var randomMode = false;
-var easyMode = false;
-var hardMode = false;
-var modeselected = false;
-var selected = "z";
-var started = false;
-function easy(){
-    if(modeselected){return;}
-    easyMode = true;
-    document.getElementById("easyMode").classList.add("selected")
-    modeselected = true;
-    if(selected === "add"){mAdd()}
-    if(selected === "sub"){mSub()}
-    if(selected === "mul"){mMul()}
-    if(selected === "div"){mDiv()}
-}
-function hard(){
-    if(modeselected){return;}
-    hardMode = true;
-    document.getElementById("hardMode").classList.add("selected")
-    modeselected = true;
-    if(selected === "add"){mAdd()}
-    if(selected === "sub"){mSub()}
-    if(selected === "mul"){mMul()}
-    if(selected === "div"){mDiv()}
-}
+var correct = 0;
 function mAdd() {
-    if(!started){document.getElementById("addB").classList.add("selected")}
-    started = true;
-    selected = "add"
-    if(!modeselected){return;}
-    started = true;
-    if (notdone) {
-        return;
-    }
-    notdone = true;
-    if (!randomMode) {
-        document.getElementById("addB").classList.add("selected")
-    }
-    if (easyMode) {
+    if (mode === "none") { hide1Show2(); mode = "Addition" }
+    sign = "+"
+    if (dif === "Easy") {
         num1 = Math.floor((Math.random() * 100) + 1);
         num2 = Math.floor((Math.random() * 100) + 1);
-    } else if (hardMode) {
-        num1 = Math.floor((Math.random() * 999) + 1);
-        num2 = Math.floor((Math.random() * 999) + 1);
+    } else if (dif === "Hard") {
+        num1 = Math.floor((Math.random() * 900) + 100);
+        num2 = Math.floor((Math.random() * 900) + 100);
+    }
+    if (num1 < num2) {
+        mAdd()
     }
     document.getElementById("num1").innerHTML = num1
-    sign = document.getElementById("sign1")
-    sign.innerHTML = "+"
+    document.getElementById("sign").innerHTML = "+"
     document.getElementById("num2").innerHTML = num2
     answer = num1 + num2
 }
 function mSub() {
-    if(!started){document.getElementById("subB").classList.add("selected")}
-    started = true;
-    selected = "sub"
-    if(!modeselected){return;}
-    if (notdone) {
-        return;
-    }
-    notdone = true;
-    if (!randomMode) {
-        document.getElementById("subB").classList.add("selected")
-    }
-    if (easyMode) {
+    if (mode === "none") { hide1Show2(); mode = "Subtraction" }
+    sign = "-"
+    if (dif === "Easy") {
         num1 = Math.floor((Math.random() * 100) + 1);
         num2 = Math.floor((Math.random() * 100) + 1);
-    } else if (hardMode) {
-        num1 = Math.floor((Math.random() * 999) + 1);
-        num2 = Math.floor((Math.random() * 999) + 1);
+    } else if (dif === "Hard") {
+        num1 = Math.floor((Math.random() * 900) + 100);
+        num2 = Math.floor((Math.random() * 900) + 100);
     }
-
     if (num1 < num2) {
-        notdone = false;
         mSub()
-    } else {
-        document.getElementById("num1").innerHTML = num1
-        sign = document.getElementById("sign1")
-        sign.innerHTML = "-"
-        document.getElementById("num2").innerHTML = num2
-        answer = num1 - num2
     }
+    document.getElementById("num1").innerHTML = num1
+    document.getElementById("sign").innerHTML = "-"
+    document.getElementById("num2").innerHTML = num2
+    answer = num1 - num2
 }
 function mMul() {
-    if(!started){document.getElementById("mulB").classList.add("selected")}
-    started = true;
-    selected = "mul"
-    if(!modeselected){return;}
-    if (notdone) { return; }
-    notdone = true;
-    if (!randomMode) {
-        document.getElementById("mulB").classList.add("selected")
-    }
-    if (easyMode) {
+    if (mode === "none") { hide1Show2(); mode = "Multiplication" }
+    sign = "x"
+    if (dif === "Easy") {
         num1 = Math.floor((Math.random() * 10) + 1);
         num2 = Math.floor((Math.random() * 10) + 1);
-    } else if (hardMode) {
-        num1 = Math.floor((Math.random() * 100) + 1);
-        num2 = Math.floor((Math.random() * 10) + 1);
+    } else if (dif === "Hard") {
+        num1 = Math.floor((Math.random() * 50) + 1);
+        num2 = Math.floor((Math.random() * 50) + 1);
     }
-
     if (num1 < num2) {
-        notdone = false;
         mMul()
-    } else {
-        document.getElementById("num1").innerHTML = num1
-        sign = document.getElementById("sign1")
-        sign.innerHTML = "x"
-        document.getElementById("num2").innerHTML = num2
-        answer = num1 * num2
     }
+    document.getElementById("num1").innerHTML = num1
+    document.getElementById("sign").innerHTML = "x"
+    document.getElementById("num2").innerHTML = num2
+    answer = num1 * num2
 }
 function mDiv() {
-    if(!started){document.getElementById("divB").classList.add("selected")}
-    started = true;
-    selected = "div"
-    if(!modeselected){return;}
-    if (notdone) { return; }
-    notdone = true;
-    if (!randomMode) {
-        document.getElementById("divB").classList.add("selected")
+    if (mode === "none") { hide1Show2(); mode = "Division" }
+    sign = "\u00F7"
+    if (dif === "Easy") {
+        num2 = Math.floor((Math.random() * 50) + 3);
+        num1 = Math.floor((Math.random() * 10) + 3)*num2;
+    } else if (dif === "Hard") {
+        num2 = Math.floor((Math.random() * 20) + 3);
+        num1 = Math.floor((Math.random() * 30) + 1)*num2;
     }
-    if (easyMode) {
-        num1 = Math.floor((Math.random() * 81) + 1);
-        num2 = Math.floor((Math.random() * 7) + 3);
-    } else if (hardMode) {
-        num1 = Math.floor((Math.random() * 1000) + 1);
-        num2 = Math.floor((Math.random() * 7) + 3);
-    }
-
-    if (num1 % num2 !== 0) {
-        notdone = false;
-        mDiv()
-    } else {
-        document.getElementById("num1").innerHTML = num1
-        sign = document.getElementById("sign1")
-        sign.innerHTML = "\u00F7"
-        document.getElementById("num2").innerHTML = num2
-        answer = num1 / num2
-    }
+    document.getElementById("num1").innerHTML = num1
+    document.getElementById("sign").innerHTML = "\u00F7"
+    document.getElementById("num2").innerHTML = num2
+    answer = num1 / num2
 }
 function mSupriseMe() {
-    if(!started){document.getElementById("divB").classList.add("selected")}
-    started = true;
-    if (notdone) { return; }
-    document.getElementById("ranB").classList.add("selected")
-    started = true;
-    randomMode = true;
-    let randomS = Math.floor((Math.random() * 4) + 1)
-    if (randomS === 1) {
-        mAdd()
-    } else if (randomS === 2) {
-        mSub()
-    } else if (randomS === 3) {
-        mMul()
-    } else if (randomS === 4) {
-        mDiv()
-    }
+    if (mode === "none") { hide1Show2(); mode = "Suprise Me!" }
+    let chosen = Math.floor((Math.random() * 4) + 1)
+    if (chosen === 1) { mAdd() }
+    if (chosen === 2) { mSub() }
+    if (chosen === 3) { mMul() }
+    if (chosen === 4) { mDiv() }
 }
 function checkAnswer() {
-    if (!started) { return; }
     answered++
-    document.getElementById("total").innerHTML = answered
-    let ans = document.getElementById("ans1").value
-    ans = parseInt(`${ans}`)
-    answer = parseInt(`${answer}`)
-    if (randomMode) {
-        if (ans === answer) {
-            score++
-            document.getElementById("score").innerHTML = score
-            document.getElementById("ans1").value = " "
-            notdone = false;
-            mSupriseMe()
-        } else {
-            alert(`Incorrect, the answer was ${answer}`)
-            document.getElementById("ans1").value = ""
-            notdone = false;
-            mSupriseMe()
-        }
-    } else {
-        if (ans === answer) {
-            score++
-            document.getElementById("score").innerHTML = score
-            document.getElementById("ans1").value = " "
-            if (sign.innerHTML === "+") {
-                notdone = false;
-                mAdd()
-            } else if (sign.innerHTML === "-") {
-                notdone = false;
-                mSub()
-            } else if (sign.innerHTML === "x") {
-                notdone = false;
-                mMul()
-            } else if (sign.innerHTML === "/") {
-                notdone = false;
-                mDiv()
-            }
-        } else {
-            alert(`Incorrect, the answer was ${answer}`)
-            document.getElementById("ans1").value = ""
-            if (sign.innerHTML === "+") {
-                notdone = false;
-                mAdd()
-            } else if (sign.innerHTML === "-") {
-                notdone = false;
-                mSub()
-            } else if (sign.innerHTML === "x") {
-                notdone = false;
-                mMul()
-            } else if (sign.innerHTML === "/") {
-                notdone = false;
-                mDiv()
-            }
-        }
+    document.getElementById("answered").innerHTML = `Answered : ${answered}`
+    let ans = parseInt(document.getElementById("ans").value);
+    if (ans === answer) {
+        correct++
+        document.getElementById("correct").innerHTML = `Correct : ${correct}`
+        runGame()
+    } else if (ans !== answer) {
+        document.getElementById("b1").classList.add("hide")
+        document.getElementById("wrong").innerHTML = `Incorrect, the correct answer for ${num1} ${sign} ${num2} is ${answer}, not ${ans}`
+        document.getElementById("wrong").classList.remove("hide")
+        document.getElementById("understand").classList.remove("hide")
     }
 }
-function refreshPage() {
-    window.location.reload();
-} 
+function understand() {
+    document.getElementById("b1").classList.remove("hide")
+    document.getElementById("wrong").classList.add("hide")
+    document.getElementById("understand").classList.add("hide")
+    runGame()
+}
+function easy() {
+    dif = "Easy"
+    hide2Show3()
+}
+function hard() {
+    dif = "Hard"
+    hide2Show3()
+}
+function hide1Show2() {
+    document.getElementById("addB").classList.add("hide")
+    document.getElementById("subB").classList.add("hide")
+    document.getElementById("mulB").classList.add("hide")
+    document.getElementById("divB").classList.add("hide")
+    document.getElementById("ranB").classList.add("hide")
+    document.getElementById("centerText").innerHTML = "Select A Difficulty"
+    document.getElementById("easymode").classList.remove("hide")
+    document.getElementById("hardmode").classList.remove("hide")
+}
+function hide2Show3() {
+    document.getElementById("centerText").innerHTML = `${mode} | ${dif} mode`
+    document.getElementById("easymode").classList.add("hide")
+    document.getElementById("hardmode").classList.add("hide")
+    document.getElementById("num1").classList.remove("hide")
+    document.getElementById("sign").classList.remove("hide")
+    document.getElementById("num2").classList.remove("hide")
+    document.getElementById("equals").classList.remove("hide")
+    document.getElementById("ans").classList.remove("hide")
+    document.getElementById("sBut").classList.remove("hide")
+    document.getElementById("correct").classList.remove("hide")
+    document.getElementById("answered").classList.remove("hide")
+    runGame()
+}
+function runGame() {
+    document.getElementById("ans").value = " "
+    if (mode === "Addition") {
+        mAdd()
+    } else if (mode === "Subtraction") {
+        mSub()
+    } else if (mode === "Multiplication") {
+        mMul()
+    } else if (mode === "Division") {
+        mDiv()
+    } else if (mode === "Suprise Me!") {
+        mSupriseMe()
+    }
+}
