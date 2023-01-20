@@ -49,8 +49,8 @@ function mMul() {
         num1 = Math.floor((Math.random() * 10) + 1);
         num2 = Math.floor((Math.random() * 10) + 1);
     } else if (dif === "Hard") {
-        num1 = Math.floor((Math.random() * 50) + 1);
-        num2 = Math.floor((Math.random() * 50) + 1);
+        num1 = Math.floor((Math.random() * 40) + 10);
+        num2 = Math.floor((Math.random() * 40) + 10);
     }
     if (num1 < num2) {
         mMul()
@@ -64,11 +64,11 @@ function mDiv() {
     if (mode === "none") { hide1Show2(); mode = "Division" }
     sign = "\u00F7"
     if (dif === "Easy") {
-        num2 = Math.floor((Math.random() * 50) + 3);
-        num1 = Math.floor((Math.random() * 10) + 3)*num2;
+        num2 = Math.floor((Math.random() * 10) + 2);
+        num1 = Math.floor((Math.random() * 10) + 1) * num2;
     } else if (dif === "Hard") {
-        num2 = Math.floor((Math.random() * 20) + 3);
-        num1 = Math.floor((Math.random() * 30) + 1)*num2;
+        num2 = Math.floor((Math.random() * 10) + 10);
+        num1 = Math.floor((Math.random() * 20) + 10) * num2;
     }
     document.getElementById("num1").innerHTML = num1
     document.getElementById("sign").innerHTML = "\u00F7"
@@ -93,7 +93,11 @@ function checkAnswer() {
         runGame()
     } else if (ans !== answer) {
         document.getElementById("b1").classList.add("hide")
-        document.getElementById("wrong").innerHTML = `Incorrect, the correct answer for ${num1} ${sign} ${num2} is ${answer}, not ${ans}`
+        if (Number.isInteger(ans)) {
+            document.getElementById("wrong").innerHTML = `Incorrect, the correct answer for ${num1} ${sign} ${num2} is ${answer}, not ${ans}`
+        } else {
+            document.getElementById("wrong").innerHTML = `Incorrect, the correct answer for ${num1} ${sign} ${num2} is ${answer}`
+        }
         document.getElementById("wrong").classList.remove("hide")
         document.getElementById("understand").classList.remove("hide")
     }
@@ -150,3 +154,6 @@ function runGame() {
         mSupriseMe()
     }
 }
+function refreshPage() {
+    window.location.reload();
+} 
